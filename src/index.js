@@ -16,6 +16,7 @@ project3.addProject();
 const project4 = new Project("testproject4", "testdate", ProjectArray);
 project4.addProject();
 
-renderProject(ProjectArray, document.querySelector('.projects-container'))
 
-project1.addToDo('Test To Do 1', 'test title', ' ', ' ', ' ', false);
+project1.addToDo('TestToDo1', 'test title', 'test description', 'test due date', 'test priority', false);
+
+renderProject(ProjectArray, document.querySelector('.projects-container'))

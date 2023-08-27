@@ -5,6 +5,7 @@ class ToDo {
         this.dueDate = dueDate;
         this.priority = priority;
         this.complete = complete;
+        this.type = "ToDo";
     }; 
 
     changeCompleteStatus(){

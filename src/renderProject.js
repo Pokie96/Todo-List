@@ -1,3 +1,5 @@
+import renderToDos from "./renderToDos";
+
 const renderProject = function(array, container){
     //Loop through the given array
     for(let i = 0; i < array.length; i++){
@@ -18,6 +20,7 @@ const renderProject = function(array, container){
 
         //Append the div to the given container
         container.appendChild(projectElement);
+        container.appendChild(renderToDos(project))
     }
 }
 
