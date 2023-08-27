@@ -10,13 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/createToDo.js":
+/*!***************************!*\
+  !*** ./src/createToDo.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass ToDo {\n    constructor(title, description, dueDate, priority, complete = false){\n        this.title = title;\n        this.description = description;\n        this.dueDate = dueDate;\n        this.priority = priority;\n        this.complete = complete;\n    }; \n\n    addToDo(project, keyName){\n        project[keyName] = this;\n    }\n\n    removeToDo(project, key){\n        delete project[key];\n    }\n\n    changeCompleteStatus(){\n        if(this.complete === false){\n            this.complete = true;\n        } else{\n            this.complete = false;\n        };\n    };\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ToDo);\n\n//# sourceURL=webpack://y/./src/createToDo.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _newProject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newProject.js */ \"./src/newProject.js\");\n/* harmony import */ var _renderProject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renderProject.js */ \"./src/renderProject.js\");\n\n\n\nconst ProjectArray = [];\n\nconst project1 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject1\", \"testdate\", ProjectArray);\nproject1.addProject();\n\nconst project2 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject2\", \"testdate\", ProjectArray);\nproject2.addProject();\n\nconst project3 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject3\", \"testdate\", ProjectArray);\nproject3.addProject();\n\nconst project4 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject4\", \"testdate\", ProjectArray);\nproject4.addProject();\n\n(0,_renderProject_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(ProjectArray, document.querySelector('.projects-container'))\nconsole.log(ProjectArray);\n\n//# sourceURL=webpack://y/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _newProject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newProject.js */ \"./src/newProject.js\");\n/* harmony import */ var _renderProject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renderProject.js */ \"./src/renderProject.js\");\n/* harmony import */ var _createToDo_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./createToDo.js */ \"./src/createToDo.js\");\n\n\n\n\nconst ProjectArray = [];\n\nconst project1 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject1\", \"testdate\", ProjectArray);\nproject1.addProject();\n\nconst project2 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject2\", \"testdate\", ProjectArray);\nproject2.addProject();\n\nconst project3 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject3\", \"testdate\", ProjectArray);\nproject3.addProject();\n\nconst project4 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject4\", \"testdate\", ProjectArray);\nproject4.addProject();\n\n(0,_renderProject_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(ProjectArray, document.querySelector('.projects-container'))\nconsole.log(ProjectArray);\n\nconst testToDo1 = new _createToDo_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"]('TestTitle1', \"TestDescription\", 'TestDate', 'TestPriority', false);\nconst testToDo2 = new _createToDo_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"]('TestTitle2', \"TestDescription\", 'TestDate', 'TestPriority', false);\nconst testToDo3 = new _createToDo_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"]('TestTitle3', \"TestDescription\", 'TestDate', 'TestPriority', false);\nconst testToDo4 = new _createToDo_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"]('TestTitle4', \"TestDescription\", 'TestDate', 'TestPriority', false);\n\ntestToDo1.addToDo(project1, \"ToDo1\");\ntestToDo2.addToDo(project1, \"ToDo2\");\ntestToDo3.addToDo(project1, \"ToDo3\");\ntestToDo4.addToDo(project1, \"ToDo4\");\n\ntestToDo3.removeToDo(project1, \"ToDo3\");\n\ntestToDo1.changeCompleteStatus();\n\n//# sourceURL=webpack://y/./src/index.js?");
 
 /***/ }),
 
