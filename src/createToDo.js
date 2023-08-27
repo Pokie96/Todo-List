@@ -7,14 +7,6 @@ class ToDo {
         this.complete = complete;
     }; 
 
-    addToDo(project, keyName){
-        project[keyName] = this;
-    }
-
-    removeToDo(project, key){
-        delete project[key];
-    }
-
     changeCompleteStatus(){
         if(this.complete === false){
             this.complete = true;
