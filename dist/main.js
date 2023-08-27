@@ -16,7 +16,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _newProject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newProject.js */ \"./src/newProject.js\");\n\n\nconst ProjectArray = [];\n\nconst project1 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject1\", \"testdate\", ProjectArray);\nproject1.addProject();\nproject1.removeProject();\n\nconst project2 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject2\", \"testdate\", ProjectArray);\nproject2.addProject();\nproject2.removeProject();\n\nconst project3 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject3\", \"testdate\", ProjectArray);\nproject3.addProject();\n\nconst project4 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject4\", \"testdate\", ProjectArray);\nproject4.addProject();\n\nconsole.log(ProjectArray);\n\n//# sourceURL=webpack://y/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _newProject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newProject.js */ \"./src/newProject.js\");\n/* harmony import */ var _renderProject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renderProject.js */ \"./src/renderProject.js\");\n\n\n\nconst ProjectArray = [];\n\nconst project1 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject1\", \"testdate\", ProjectArray);\nproject1.addProject();\n\nconst project2 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject2\", \"testdate\", ProjectArray);\nproject2.addProject();\n\nconst project3 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject3\", \"testdate\", ProjectArray);\nproject3.addProject();\n\nconst project4 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject4\", \"testdate\", ProjectArray);\nproject4.addProject();\n\n(0,_renderProject_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(ProjectArray, document.querySelector('.projects-container'))\nconsole.log(ProjectArray);\n\n//# sourceURL=webpack://y/./src/index.js?");
 
 /***/ }),
 
@@ -27,6 +27,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _new
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass Project {\n    constructor(title, date, array){\n        this.title = title;\n        this.date = date;\n        this.array = array;\n    }\n\n    addProject(){\n        this.array.push(this);\n    }\n\n    removeProject(){\n        this.array.splice(this.array.indexOf(this), 1);\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Project);\n\n//# sourceURL=webpack://y/./src/newProject.js?");
+
+/***/ }),
+
+/***/ "./src/renderProject.js":
+/*!******************************!*\
+  !*** ./src/renderProject.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst renderProject = function(array, container){\n    //Loop through the given array\n    for(let i = 0; i < array.length; i++){\n        //Initialise our variables used throughout the function\n        let project = array[i];\n        let projectElement = document.createElement('div');\n        let projectTitle = document.createElement('h2');\n        let projectDate = document.createElement('p');\n\n        //Set inner text of the elements to the values inside\n        //of the given objects\n        projectTitle.innerText = project.title;\n        projectDate.innerText = project.date;\n\n        //Append the child elements to their parent element\n        projectElement.appendChild(projectTitle);\n        projectElement.appendChild(projectDate);\n\n        //Append the div to the given container\n        container.appendChild(projectElement);\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderProject);\n\n//# sourceURL=webpack://y/./src/renderProject.js?");
 
 /***/ })
 
