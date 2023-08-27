@@ -1,4 +1,5 @@
 import renderToDos from "./renderToDos";
+import appendChildren from "./appendChildren";
 
 const renderProject = function(array, container){
     //Loop through the given array
@@ -14,13 +15,17 @@ const renderProject = function(array, container){
         projectTitle.innerText = project.title;
         projectDate.innerText = project.date;
 
+        //Give the project elements class names for future styling
+        projectElement.className = 'ind-project-containers';
+        projectTitle.className = 'project-titles';
+        projectDate.className = 'project-dates';
+
         //Append the child elements to their parent element
-        projectElement.appendChild(projectTitle);
-        projectElement.appendChild(projectDate);
+        appendChildren(projectElement, projectTitle, projectDate, renderToDos(project))
+
 
         //Append the div to the given container
         container.appendChild(projectElement);
-        container.appendChild(renderToDos(project))
     }
 }
 

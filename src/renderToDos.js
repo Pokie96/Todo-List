@@ -1,4 +1,5 @@
-import ToDo from "./createToDo";
+import appendChildren from "./appendChildren";
+import assignClass from "./assignClass";
 
 //Main function to be exported
 const renderToDos = function(project){
@@ -30,6 +31,10 @@ const renderToDos = function(project){
             priority.innerText = project[currentKey].priority;
             complete.innerText = project[currentKey].complete;
 
+            //Assign a class name to these elements for future
+            //styling.
+            assignClass('to-do-properties', title, description, dueDate, priority, complete)
+
             //Append all of the new elements to the container
             //for this to do object
             appendChildren(toDoContainer, title, description, dueDate, priority, complete);
@@ -38,14 +43,6 @@ const renderToDos = function(project){
     }
     //Return the container containing all of the to do properties
     return toDoContainer
-}
-
-//Function to help append multiple children at once to a parent
-//element
-const appendChildren = function(parent, ...children){ 
-    for(let i = 0; i < children.length; i++){
-        parent.appendChild(children[i]);
-    };
 }
 
 export default renderToDos;

@@ -1,6 +1,5 @@
 import Project from "./newProject.js";
 import renderProject from "./renderProject.js";
-import ToDo from "./createToDo.js";
 
 const ProjectArray = [];
 
@@ -18,5 +17,7 @@ project4.addProject();
 
 
 project1.addToDo('TestToDo1', 'test title', 'test description', 'test due date', 'test priority', false);
+
+project2.addToDo('TestToDo2', 'test title', 'test description', 'test due date', 'test priority', false);
 
 renderProject(ProjectArray, document.querySelector('.projects-container'))
