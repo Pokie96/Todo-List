@@ -20,16 +20,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/assignClass.js":
-/*!****************************!*\
-  !*** ./src/assignClass.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n//Function to allow me to add the same class name to multiple\n//elements.\nconst assignClass = function(className, ...elements){\n    for(let i = 0; i < elements.length; i++){\n        elements[i].className = className;\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (assignClass);\n\n//# sourceURL=webpack://y/./src/assignClass.js?");
-
-/***/ }),
-
 /***/ "./src/createToDo.js":
 /*!***************************!*\
   !*** ./src/createToDo.js ***!
@@ -46,7 +36,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _newProject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newProject.js */ \"./src/newProject.js\");\n/* harmony import */ var _renderProject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renderProject.js */ \"./src/renderProject.js\");\n\n\n\nconst ProjectArray = [];\n\nconst project1 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject1\", \"testdate\", ProjectArray);\nproject1.addProject();\n\nconst project2 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject2\", \"testdate\", ProjectArray);\nproject2.addProject();\n\nconst project3 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject3\", \"testdate\", ProjectArray);\nproject3.addProject();\n\nconst project4 = new _newProject_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](\"testproject4\", \"testdate\", ProjectArray);\nproject4.addProject();\n\n\nproject1.addToDo('TestToDo1', 'test title', 'test description', 'test due date', 'test priority', false);\n\nproject2.addToDo('TestToDo2', 'test title', 'test description', 'test due date', 'test priority', false);\n\n(0,_renderProject_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(ProjectArray, document.querySelector('.projects-container'))\n\n//# sourceURL=webpack://y/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _newProject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newProject.js */ \"./src/newProject.js\");\n/* harmony import */ var _renderProject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renderProject.js */ \"./src/renderProject.js\");\n/* harmony import */ var _openProjectField_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./openProjectField.js */ \"./src/openProjectField.js\");\n\n\n\n\nconst ProjectArray = [];\n\nconst newProjectBtn = document.querySelector('#new-project-button')\n\nnewProjectBtn.addEventListener('click', _openProjectField_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])\n\n//# sourceURL=webpack://y/./src/index.js?");
 
 /***/ }),
 
@@ -60,23 +50,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/openProjectField.js":
+/*!*********************************!*\
+  !*** ./src/openProjectField.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _appendChildren__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./appendChildren */ \"./src/appendChildren.js\");\n\n\nconst openProjectField = function(){\n    const newProjectTitleInput = document.createElement('input');\n    const newProjectSubmit = document.createElement('button');\n    const cancelNewProjectForm = document.createElement('button');\n\n    newProjectSubmit.innerText = 'Submit';\n    cancelNewProjectForm.innerText = 'Cancel';\n    \n    newProjectTitleInput.className = 'new-project-title-input';\n    newProjectSubmit.className = 'new-project-submit';\n    cancelNewProjectForm.className = 'cancel-new-project';\n\n    cancelNewProjectForm.addEventListener('click', closeProjectField);\n\n    const projectContainer = document.querySelector('.projects-container');\n\n    (0,_appendChildren__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(projectContainer, newProjectTitleInput, newProjectSubmit, cancelNewProjectForm);\n\n};\n\nconst closeProjectField = function(){\n    const newProjectTitleInput = document.querySelector('.new-project-title-input');\n    const newProjectSubmit = document.querySelector('.new-project-submit');\n    const cancelNewProjectForm = document.querySelector('.cancel-new-project');\n\n    newProjectTitleInput.remove();\n    newProjectSubmit.remove();\n    cancelNewProjectForm.remove();\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (openProjectField);\n\n//# sourceURL=webpack://y/./src/openProjectField.js?");
+
+/***/ }),
+
 /***/ "./src/renderProject.js":
 /*!******************************!*\
   !*** ./src/renderProject.js ***!
   \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _renderToDos__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./renderToDos */ \"./src/renderToDos.js\");\n/* harmony import */ var _appendChildren__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./appendChildren */ \"./src/appendChildren.js\");\n\n\n\nconst renderProject = function(array, container){\n    //Loop through the given array\n    for(let i = 0; i < array.length; i++){\n        //Initialise our variables used throughout the function\n        let project = array[i];\n        let projectElement = document.createElement('div');\n        let projectTitle = document.createElement('h2');\n        let projectDate = document.createElement('p');\n\n        //Set inner text of the elements to the values inside\n        //of the given objects\n        projectTitle.innerText = project.title;\n        projectDate.innerText = project.date;\n\n        //Give the project elements class names for future styling\n        projectElement.className = 'ind-project-containers';\n        projectTitle.className = 'project-titles';\n        projectDate.className = 'project-dates';\n\n        //Append the child elements to their parent element\n        (0,_appendChildren__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(projectElement, projectTitle, projectDate, (0,_renderToDos__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(project))\n\n\n        //Append the div to the given container\n        container.appendChild(projectElement);\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderProject);\n\n//# sourceURL=webpack://y/./src/renderProject.js?");
-
-/***/ }),
-
-/***/ "./src/renderToDos.js":
-/*!****************************!*\
-  !*** ./src/renderToDos.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _appendChildren__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./appendChildren */ \"./src/appendChildren.js\");\n/* harmony import */ var _assignClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assignClass */ \"./src/assignClass.js\");\n\n\n\n//Main function to be exported\nconst renderToDos = function(project){\n    //Assign a variable to an array of the key names from each\n    //project.\n    let keyArray = Object.keys(project);\n\n    //Create an element to contain all of the to do properties\n    const toDoContainer = document.createElement('div');\n\n    //Loop through the key arrays to find any to do keys inside \n    //of the projects.\n    for(let i = 0; i < keyArray.length; i++){\n        let currentKey = keyArray[i];\n        if(project[keyArray[i]].type === \"ToDo\"){\n            //Initialize all of the variables that will be \n            //used through the function to their dom elements\n            const title = document.createElement('p');\n            const description = document.createElement('p');\n            const dueDate = document.createElement('p');\n            const priority = document.createElement('p');\n            const complete = document.createElement('p');\n\n            //Append text to elements from their respective \n            //properties\n            title.innerText = project[currentKey].title;\n            description.innerText = project[currentKey].description;\n            dueDate.innerText = project[currentKey].dueDate;\n            priority.innerText = project[currentKey].priority;\n            complete.innerText = project[currentKey].complete;\n\n            //Assign a class name to these elements for future\n            //styling.\n            (0,_assignClass__WEBPACK_IMPORTED_MODULE_1__[\"default\"])('to-do-properties', title, description, dueDate, priority, complete)\n\n            //Append all of the new elements to the container\n            //for this to do object\n            ;(0,_appendChildren__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(toDoContainer, title, description, dueDate, priority, complete);\n\n        } \n    }\n    //Return the container containing all of the to do properties\n    return toDoContainer\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderToDos);\n\n//# sourceURL=webpack://y/./src/renderToDos.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _appendChildren__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./appendChildren */ \"./src/appendChildren.js\");\n\n\nconst renderProject = function(array, container){\n    //Loop through the given array\n    for(let i = 0; i < array.length; i++){\n        //Initialise our variables used throughout the function\n        let project = array[i];\n        let projectElement = document.createElement('div');\n        let projectTitle = document.createElement('h2');\n        let projectDate = document.createElement('p');\n\n        //Set inner text of the elements to the values inside\n        //of the given objects\n        projectTitle.innerText = project.title;\n        projectDate.innerText = project.date;\n\n        //Give the project elements class names for future styling\n        projectElement.className = 'ind-project-containers';\n        projectTitle.className = 'project-titles';\n        projectDate.className = 'project-dates';\n\n        //Append the child elements to their parent element\n        (0,_appendChildren__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(projectElement, projectTitle, projectDate)\n\n\n        //Append the div to the given container\n        container.appendChild(projectElement);\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderProject);\n\n//# sourceURL=webpack://y/./src/renderProject.js?");
 
 /***/ })
 
