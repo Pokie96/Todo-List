@@ -1,6 +1,12 @@
 import appendChildren from "./appendChildren";
+import Project from "./newProject";
+import renderProject from "./renderProject";
 
-const openProjectField = function(){
+
+const openProjectField = function(arrayToSubmit){
+    
+    tempRemoveNewProjectBtn();
+    
     const newProjectTitleInput = document.createElement('input');
     const newProjectSubmit = document.createElement('button');
     const cancelNewProjectForm = document.createElement('button');
@@ -12,15 +18,18 @@ const openProjectField = function(){
     newProjectSubmit.className = 'new-project-submit';
     cancelNewProjectForm.className = 'cancel-new-project';
 
-    cancelNewProjectForm.addEventListener('click', closeProjectField);
+    cancelNewProjectForm.addEventListener('click', closeProjectForm);
+    newProjectSubmit.addEventListener('click', () => {
+        submitNewProject(arrayToSubmit);
+    });
 
-    const projectContainer = document.querySelector('.projects-container');
+    const newProjectsForm = document.querySelector('.new-projects-form');
 
-    appendChildren(projectContainer, newProjectTitleInput, newProjectSubmit, cancelNewProjectForm);
+    appendChildren(newProjectsForm, newProjectTitleInput, newProjectSubmit, cancelNewProjectForm);
 
 };
 
-const closeProjectField = function(){
+const closeProjectForm = function(){
     const newProjectTitleInput = document.querySelector('.new-project-title-input');
     const newProjectSubmit = document.querySelector('.new-project-submit');
     const cancelNewProjectForm = document.querySelector('.cancel-new-project');
@@ -28,6 +37,31 @@ const closeProjectField = function(){
     newProjectTitleInput.remove();
     newProjectSubmit.remove();
     cancelNewProjectForm.remove();
+
+    const newProjectBtn = document.querySelector('#new-project-button');
+    newProjectBtn.addEventListener('click', openProjectField);
+
 };
+
+const submitNewProject = function(array){
+    const newProjectTitleInput = document.querySelector('.new-project-title-input');
+    const newProjectTitle = newProjectTitleInput.value;    
+    const newProject = new Project(newProjectTitle, 2023,array);
+    console.log(newProject);
+    newProject.addProject();
+    console.log(array)
+    
+    renderProject(array, document.querySelector('.projects-container'));
+
+    closeProjectForm();
+
+    const newProjectBtn = document.querySelector('#new-project-button');
+    newProjectBtn.addEventListener('click', openProjectField);
+};
+
+const tempRemoveNewProjectBtn = function(){
+    const newProjectBtn = document.querySelector('#new-project-button');
+    newProjectBtn.removeEventListener('click', openProjectField);
+}
 
 export default openProjectField;

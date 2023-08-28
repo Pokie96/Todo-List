@@ -1,6 +1,10 @@
 import appendChildren from "./appendChildren";
 
 const renderProject = function(array, container){
+    
+    //Clear the DOM before rendering again
+    container.innerHTML = '';
+
     //Loop through the given array
     for(let i = 0; i < array.length; i++){
         //Initialise our variables used throughout the function
