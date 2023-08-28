@@ -1,5 +1,8 @@
 import appendChildren from "./appendChildren";
+import createAddTaskBtn from "./addTaskBtn";
 
+//Function that renders the project into the DOM to be 
+//displayed on the page
 const renderProject = function(array, container){
     
     //Clear the DOM before rendering again
@@ -19,7 +22,7 @@ const renderProject = function(array, container){
         projectDate.innerText = project.date;
 
         //Give the project elements class names for future styling
-        projectElement.className = 'ind-project-containers';
+        projectElement.className = 'indiv-project-containers';
         projectTitle.className = 'project-titles';
         projectDate.className = 'project-dates';
 
@@ -29,6 +32,9 @@ const renderProject = function(array, container){
 
         //Append the div to the given container
         container.appendChild(projectElement);
+
+        //Render the Add Task Button
+        createAddTaskBtn(projectElement);
     }
 }
 

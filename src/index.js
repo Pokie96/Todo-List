@@ -1,10 +1,10 @@
 
-import openProjectField from "./openProjectField.js";
+import openProjectForm from "./openProjectForm.js";
 
 const projectsList = [];
 
 const newProjectBtn = document.querySelector('#new-project-button');
 newProjectBtn.addEventListener('click', () => {
-    openProjectField(projectsList);
+    openProjectForm(projectsList);
     console.log(projectsList);
 });

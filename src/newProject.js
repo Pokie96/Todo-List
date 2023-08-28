@@ -1,5 +1,6 @@
-import ToDo from "./createToDo";
+import Task from "./createTask";
 
+//A class constructor that can be used to create new projects
 class Project {
     constructor(title, date, array){
         this.title = title;
@@ -15,12 +16,12 @@ class Project {
         this.array.splice(this.array.indexOf(this), 1);
     }
 
-    addToDo(toDoName, title, description, dueDate, priority, complete){
-        const toDo = new ToDo(title, description, dueDate, priority, complete);
-        this[toDoName] = toDo;
+    addTask(taskName, title, description, dueDate, priority, complete){
+        const task = new Task(title, description, dueDate, priority, complete);
+        this[taskName] = task;
     }
 
-    removeToDo(key){
+    removeTask(key){
         delete this[key];
     }
 }

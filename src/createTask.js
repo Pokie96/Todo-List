@@ -1,11 +1,12 @@
-class ToDo {
+//This is the class constructor for our Tasks
+class Task {
     constructor(title, description, dueDate, priority, complete = false){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.complete = complete;
-        this.type = "ToDo";
+        this.type = "Task";
     }; 
 
     changeCompleteStatus(){
@@ -17,4 +18,4 @@ class ToDo {
     };
 };
 
-export default ToDo;
+export default Task;
