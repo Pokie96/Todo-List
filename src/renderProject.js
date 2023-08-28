@@ -1,4 +1,3 @@
-import renderToDos from "./renderToDos";
 import appendChildren from "./appendChildren";
 
 const renderProject = function(array, container){
@@ -21,7 +20,7 @@ const renderProject = function(array, container){
         projectDate.className = 'project-dates';
 
         //Append the child elements to their parent element
-        appendChildren(projectElement, projectTitle, projectDate, renderToDos(project))
+        appendChildren(projectElement, projectTitle, projectDate)
 
 
         //Append the div to the given container
