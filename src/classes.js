@@ -46,3 +46,20 @@ export class Task {
         };
     };
 };
+
+export class Controller {
+    static projectsArray = [];
+
+    getProjectsArray(){
+        return Controller.projectsArray;
+    };
+
+    addProject(project){
+        Controller.projectsArray.push(project);
+    };
+
+    deleteProject(project){
+        Controller.projectsArray.splice(Controller.projectsArray.indexOf(project), 1);
+    };
+    
+};
