@@ -1,5 +1,5 @@
-
-import openProjectForm from "./openProjectForm.js";
+import { openProjectForm } from "./handleProject";
+import { renderTasks } from "./handleTask";
 
 const projectsList = [];
 
@@ -11,5 +11,6 @@ newProjectBtn.addEventListener('click', (e) => {
     openProjectForm(projectsList);
     e.target.remove();
 });
+
 
 
