@@ -1,6 +1,7 @@
 import { appendChildren } from "./helperFunction";
 import { Project } from "./classes";
 import { renderCreateAddTaskBtn } from "./handleTask";
+import { Controller } from "./classes";
 
 //A function to close the form that will be used in other 
 //functions within this module
@@ -119,10 +120,12 @@ export const submitNewProject = function(projectsList){
 
     //Create a new project with the given title, date and projectsList
     //to store it
-    const newProject = new Project(newProjectTitle, 2023,projectsList);
+    const newProject = new Project(newProjectTitle, 2023);
 
+    const controller = new Controller();
+    
     //Add the project to the given projects List
-    newProject.addProject();
+    controller.addProject(newProject);
 
     //Render the projects in the projects list into the given container
     renderProject(projectsList, document.querySelector('.projects-container'));

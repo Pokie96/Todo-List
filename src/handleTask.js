@@ -55,12 +55,17 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
 export const removeTaskForm = function(){
     //Select all of the form elements using their class name
     const taskInputs = document.querySelectorAll('.task-input');
+    const taskSubmitBtn = document.querySelector('.submit-task');
+    const taskCancelBtn = document.querySelector('.cancel-task');
 
     //For every field input in the list of field inputs
     for(let i = 0; i < taskInputs.length; i++){
         //Remove the field input
         taskInputs[i].remove();
     }
+
+    taskSubmitBtn.remove();
+    taskCancelBtn.remove();
 };
 
 //Function to render the tasks of a project on to the DOM

@@ -2,19 +2,10 @@
 
 //A class constructor that can be used to create new projects
 export class Project {
-    constructor(title, date, array){
+    constructor(title, date){
         this.title = title;
         this.date = date;
-        this.array = array;
         this.taskList = [];
-    }
-
-    addProject(){
-        this.array.push(this);
-    }
-
-    removeProject(){
-        this.array.splice(this.array.indexOf(this), 1);
     }
 
     addTask(title, description, dueDate, priority, complete){
@@ -22,8 +13,8 @@ export class Project {
         this.taskList.push(task);
     }
 
-    removeTask(key){
-        delete this[key];
+    removeTask(task){
+        this.taskList.splice(this.taskList.indexOf(task), 1);
     }
 };
 
