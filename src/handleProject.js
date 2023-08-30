@@ -1,7 +1,8 @@
 import { appendChildren } from "./helperFunction";
 import { Project } from "./classes";
-import { renderCreateAddTaskBtn } from "./handleTask";
+import { renderCreateAddTaskBtn, renderTasks } from "./handleTask";
 import { Controller } from "./classes";
+import { removeAllTasksDOM } from "./handleTask";
 
 //A function to close the form that will be used in other 
 //functions within this module
@@ -88,7 +89,16 @@ export const renderProject = function(array, container){
         container.appendChild(projectElement);
 
         //Render the Add Task Button
-        renderCreateAddTaskBtn(projectElement, project);
+        //renderCreateAddTaskBtn(projectElement, project);
+
+        projectTitle.addEventListener('click', () => {
+            removeAllTasksDOM();
+            renderCreateAddTaskBtn(document.querySelector('.to-do-list-container'), project);
+            renderProject(array, container);
+            renderTasks(project);
+            console.log(projectTitle);
+            setActiveProject(projectTitle);
+        })
     }
 };
 
@@ -132,8 +142,9 @@ export const submitNewProject = function(projectsList){
 
     //Close the project form
     closeProjectForm(projectsList);
+};
 
-    //Re-Render the "New Project" button for use again.
-    /*const newProjectBtn = document.querySelector('#new-project-button');
-    newProjectBtn.addEventListener('click', openProjectForm);*/
+//A function to show which project is currently chosen.
+export const setActiveProject = function(currentProject){
+    currentProject.style.color = 'blue';
 };

@@ -86,13 +86,13 @@ export const renderTasks = function(project){
         let currentTask = taskList[i];
         //Initialize all of the variables that will be 
         //used through the function to their dom elements
+        const taskWrapper = document.createElement('div');
         const title = document.createElement('p');
         const description = document.createElement('p');
         const dueDate = document.createElement('p');
         const priority = document.createElement('p');
         const complete = document.createElement('p');
 
-        console.log(currentTask);
 
         //Append text to elements from their respective 
         //properties
@@ -105,10 +105,12 @@ export const renderTasks = function(project){
         //Assign a class name to these elements for future
         //styling.
         assignClass('task-properties', title, description, dueDate, priority, complete)
+        taskWrapper.className = 'task-wrapper';
 
         //Append all of the new elements to the container
         //for this to do object
-        appendChildren(tasksContainer, title, description, dueDate, priority, complete);
+        appendChildren(taskWrapper, title, description, dueDate, priority, complete);
+        tasksContainer.appendChild(taskWrapper)
     };
 };
 
@@ -139,4 +141,15 @@ export const addTaskToProject = function(project){
     const dueDateInput = document.querySelector('#task-due-date-input');
     const priorityInput = document.querySelector('#task-priority-input');
     project.addTask(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value)
+}
+
+export const removeAllTasksDOM = function(){
+    const displayedTasks = document.querySelectorAll('.task-wrapper');
+    for (let task of displayedTasks){
+        task.remove();
+    };
+    const addTaskButton = document.querySelector('.add-task-button');
+    if(addTaskButton){
+        addTaskButton.remove();
+    };
 }
