@@ -44,6 +44,7 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     newTaskSubmitBtn.addEventListener('click', () => {
         addTaskToProject(currentProject);
         renderTasks(currentProject);
+        removeTaskForm();
     });
 
     //Append the field elements to the given container element
