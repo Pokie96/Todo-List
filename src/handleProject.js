@@ -45,7 +45,11 @@ export const openProjectForm = function(arrayToSubmit){
         closeProjectForm(arrayToSubmit);
     });
     newProjectSubmit.addEventListener('click', () => {
-        submitNewProject(arrayToSubmit);
+        if(!newProjectTitleInput.value){
+            alert('You must enter a title for the project!');
+        } else{
+            submitNewProject(arrayToSubmit);
+        }
     });
 
     //Select the element where the form will be attached to
@@ -94,9 +98,7 @@ export const renderProject = function(array, container){
         projectTitle.addEventListener('click', () => {
             removeAllTasksDOM();
             renderCreateAddTaskBtn(document.querySelector('.to-do-list-container'), project);
-            renderProject(array, container);
             renderTasks(project);
-            console.log(projectTitle);
             setActiveProject(projectTitle);
         })
     }
@@ -146,5 +148,9 @@ export const submitNewProject = function(projectsList){
 
 //A function to show which project is currently chosen.
 export const setActiveProject = function(currentProject){
-    currentProject.style.color = 'blue';
+    const allProjectTitles = document.querySelectorAll('.project-titles');
+    for(let project of allProjectTitles){
+        project.style.color = 'black';
+    }
+    currentProject.style.color = 'pink';
 };

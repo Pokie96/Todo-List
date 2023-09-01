@@ -29,3 +29,8 @@ body{
     grid-row: 2/4;
     grid-column: 2/3;
 }
+
+.task-wrapper{
+    display: flex;
+    flex-direction: row;
+}
