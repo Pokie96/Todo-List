@@ -18,6 +18,12 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     taskDueDateInput.className = 'task-input';
     taskPriorityInput.className = 'task-input';
 
+    //Assign placeholder values to all of the inputs
+    taskTitleInput.setAttribute('placeholder', 'Task Title');
+    taskDescriptionInput.setAttribute('placeholder', 'Task Description');
+    taskDueDateInput.setAttribute('placeholder', 'Task Due Date');
+    taskPriorityInput.setAttribute('placeholder', 'Task Priority Level');
+
     //Assign field elements an ID
     taskTitleInput.id = 'task-title-input';
     taskDescriptionInput.id = 'task-description-input';
@@ -140,7 +146,12 @@ export const addTaskToProject = function(project){
     const descriptionInput = document.querySelector('#task-description-input');
     const dueDateInput = document.querySelector('#task-due-date-input');
     const priorityInput = document.querySelector('#task-priority-input');
-    project.addTask(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value)
+    
+    if(!titleInput.value || !descriptionInput.value || !dueDateInput.value || !priorityInput.value){
+        alert('All fields should be completed before submitting!');
+    } else{
+        project.addTask(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value)
+    };
 }
 
 export const removeAllTasksDOM = function(){

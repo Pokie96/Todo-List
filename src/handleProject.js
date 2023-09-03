@@ -34,6 +34,9 @@ export const openProjectForm = function(arrayToSubmit){
     //Add the inner text to the button elements
     newProjectSubmit.innerText = 'Submit';
     cancelNewProjectForm.innerText = 'Cancel';
+
+    //Assign a placeholder to the input element
+    newProjectTitleInput.setAttribute('placeholder', 'Project Title');
     
     //Assign classes to the elements
     newProjectTitleInput.className = 'new-project-title-input';
