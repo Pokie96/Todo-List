@@ -6,13 +6,19 @@ import { assignClass } from "./helperFunction";
 //created in
 export const openTaskForm = function(elementToAppendTo, currentProject){
 
+    //Select the "Add task" that we want to always append the 
+    //form after
+    const addTaskBtn = document.querySelector('.add-task-button');
+
     //Create all of the field elements required for a task
+    const taskFormWrapper = document.createElement('div');
     const taskTitleInput = document.createElement('input');
     const taskDescriptionInput = document.createElement('input');
     const taskDueDateInput = document.createElement('input');
     const taskPriorityInput = document.createElement('input');
 
     //Assign all of the field elements a class name
+    taskFormWrapper.className = 'task form';
     taskTitleInput.className = 'task-input';
     taskDescriptionInput.className = 'task-input';
     taskDueDateInput.className = 'task-input';
@@ -54,7 +60,10 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     });
 
     //Append the field elements to the given container element
-    appendChildren(elementToAppendTo, taskTitleInput, taskDescriptionInput, taskDueDateInput, taskPriorityInput, newTaskSubmitBtn, newTaskCancelBtn);
+    appendChildren(taskFormWrapper, taskTitleInput, taskDescriptionInput, taskDueDateInput, taskPriorityInput, newTaskSubmitBtn, newTaskCancelBtn);
+
+    //Append the form to after the "Add Task Button";
+    addTaskBtn.parentNode.insertBefore(taskFormWrapper, addTaskBtn.nextSibling);
 
 };
 

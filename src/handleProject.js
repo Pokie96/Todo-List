@@ -100,7 +100,7 @@ export const renderProject = function(array, container){
 
         projectTitle.addEventListener('click', () => {
             removeAllTasksDOM();
-            renderCreateAddTaskBtn(document.querySelector('.to-do-list-container'), project);
+            renderCreateAddTaskBtn(document.querySelector('.to-do-list-container'),project);
             renderTasks(project);
             setActiveProject(projectTitle);
         })
