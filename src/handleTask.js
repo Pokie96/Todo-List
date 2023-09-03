@@ -117,6 +117,7 @@ export const renderTasks = function(project){
         const description = document.createElement('p');
         const dueDate = document.createElement('p');
         const priority = document.createElement('p');
+        const taskDeleteBtn = renderDeleteTaskBtn(project, currentTask);
 
 
         //Append text to elements from their respective 
@@ -133,9 +134,19 @@ export const renderTasks = function(project){
 
         //Append all of the new elements to the container
         //for this to do object
-        appendChildren(taskWrapper, title, description, dueDate, priority);
+        appendChildren(taskWrapper, title, description, dueDate, priority, taskDeleteBtn);
         tasksContainer.appendChild(taskWrapper)
     };
+};
+
+export const renderDeleteTaskBtn = function(thisProject, thisTask){
+    const deleteTaskBtn = document.createElement('button');
+    deleteTaskBtn.innerText = 'X';
+    deleteTaskBtn.addEventListener('click', ()=>{
+        thisProject.removeTask(thisTask);
+        renderTasks(thisProject);
+    })
+    return deleteTaskBtn;
 };
 
 //Function creates our "Add Task Button" given a parent element

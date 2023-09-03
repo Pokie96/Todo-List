@@ -155,6 +155,9 @@ export const submitNewProject = function(projectsList){
 //A function to show which project is currently chosen.
 export const setActiveProject = function(currentProject){
     const allProjectTitles = document.querySelectorAll('.project-titles');
+    const projectTitle = document.querySelector("#project-title");
+    projectTitle.innerText = '';
+    projectTitle.innerText = currentProject.textContent;
     for(let project of allProjectTitles){
         project.style.color = 'black';
     }
