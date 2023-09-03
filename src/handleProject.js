@@ -1,8 +1,7 @@
 import { appendChildren } from "./helperFunction";
 import { Project } from "./classes";
-import { renderCreateAddTaskBtn, renderTasks } from "./handleTask";
+import { renderCreateAddTaskBtn, renderTasks, removeAllTasksDOM, removeAddTaskButton, removeTaskForm } from "./handleTask";
 import { Controller } from "./classes";
-import { removeAllTasksDOM } from "./handleTask";
 
 //A function to close the form that will be used in other 
 //functions within this module
@@ -100,6 +99,8 @@ export const renderProject = function(array, container){
 
         projectTitle.addEventListener('click', () => {
             removeAllTasksDOM();
+            removeAddTaskButton();
+            removeTaskForm();
             renderCreateAddTaskBtn(document.querySelector('.to-do-list-container'),project);
             renderTasks(project);
             setActiveProject(projectTitle);
@@ -123,6 +124,8 @@ export const renderNewProjectBtn = function(projectArray){
     //Append the button back to the correct div
     const buttonContainer = document.querySelector('.new-projects-form');
     buttonContainer.appendChild(newProjectBtn);
+
+    removeAllTasksDOM();
 };
 
 //Function to create and add a new Project to a given projectsList

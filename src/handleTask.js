@@ -75,18 +75,29 @@ export const removeTaskForm = function(){
     const taskCancelBtn = document.querySelector('.cancel-task');
 
     //For every field input in the list of field inputs
-    for(let i = 0; i < taskInputs.length; i++){
-        //Remove the field input
-        taskInputs[i].remove();
-    }
+    if(!taskInputs){
+        return;
+    }else{
+        for(let i = 0; i < taskInputs.length; i++){
+            //Remove the field input
+            taskInputs[i].remove();
+        }
+    };
 
-    taskSubmitBtn.remove();
-    taskCancelBtn.remove();
+    if(!taskSubmitBtn){
+        return;
+    }else{
+        taskSubmitBtn.remove();
+        taskCancelBtn.remove();
+    };
 };
 
 //Function to render the tasks of a project on to the DOM
 //to be displayed on the page
 export const renderTasks = function(project){
+    //First the tasks container must be emptied
+    removeAllTasksDOM()
+
     //Assign a variable to an array of the key names from each
     //project.
     let taskList = project.taskList;
@@ -106,7 +117,6 @@ export const renderTasks = function(project){
         const description = document.createElement('p');
         const dueDate = document.createElement('p');
         const priority = document.createElement('p');
-        const complete = document.createElement('p');
 
 
         //Append text to elements from their respective 
@@ -115,16 +125,15 @@ export const renderTasks = function(project){
         description.innerText = currentTask.description;
         dueDate.innerText = currentTask.dueDate;
         priority.innerText = currentTask.priority;
-        complete.innerText = currentTask.complete;
 
         //Assign a class name to these elements for future
         //styling.
-        assignClass('task-properties', title, description, dueDate, priority, complete)
+        assignClass('task-properties', title, description, dueDate, priority)
         taskWrapper.className = 'task-wrapper';
 
         //Append all of the new elements to the container
         //for this to do object
-        appendChildren(taskWrapper, title, description, dueDate, priority, complete);
+        appendChildren(taskWrapper, title, description, dueDate, priority);
         tasksContainer.appendChild(taskWrapper)
     };
 };
@@ -163,11 +172,15 @@ export const addTaskToProject = function(project){
     };
 }
 
+//Function to remove all tasks from the screen.
 export const removeAllTasksDOM = function(){
     const displayedTasks = document.querySelectorAll('.task-wrapper');
     for (let task of displayedTasks){
         task.remove();
     };
+}
+
+export const removeAddTaskButton = function(){
     const addTaskButton = document.querySelector('.add-task-button');
     if(addTaskButton){
         addTaskButton.remove();

@@ -38,6 +38,7 @@ export class Task {
     };
 };
 
+//This class has control over the collection of the projects
 export class Controller {
     static projectsArray = [];
 
