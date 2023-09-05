@@ -7,15 +7,11 @@ import { Controller } from "./classes";
 //functions within this module
 export const closeProjectForm = function(projectsList){
     //Select the form input fields
-    const newProjectTitleInput = document.querySelector('.new-project-title-input');
-    const newProjectSubmit = document.querySelector('.new-project-submit');
-    const cancelNewProjectForm = document.querySelector('.cancel-new-project');
+    const projectFormWrapper = document.querySelector('.project-form-wrapper');
 
     //Remove the form input fields
-    newProjectTitleInput.remove();
-    newProjectSubmit.remove();
-    cancelNewProjectForm.remove();
-
+    projectFormWrapper.remove();
+    
     //Re-Render the "New Project" button for use again
     renderNewProjectBtn(projectsList);
 
@@ -26,6 +22,7 @@ export const closeProjectForm = function(projectsList){
 export const openProjectForm = function(arrayToSubmit){
 
     //Create the field elements for the form
+    const projectFormWrapper = document.createElement('div');
     const newProjectTitleInput = document.createElement('input');
     const newProjectSubmit = document.createElement('button');
     const cancelNewProjectForm = document.createElement('button');
@@ -38,6 +35,7 @@ export const openProjectForm = function(arrayToSubmit){
     newProjectTitleInput.setAttribute('placeholder', 'Project Title');
     
     //Assign classes to the elements
+    projectFormWrapper.className = 'project-form-wrapper';
     newProjectTitleInput.className = 'new-project-title-input';
     newProjectSubmit.className = 'new-project-submit';
     cancelNewProjectForm.className = 'cancel-new-project';
@@ -58,8 +56,9 @@ export const openProjectForm = function(arrayToSubmit){
     const newProjectsForm = document.querySelector('.new-projects-form');
 
     //Attach the form to the previous element
-    appendChildren(newProjectsForm, newProjectTitleInput, newProjectSubmit, cancelNewProjectForm);
+    appendChildren(projectFormWrapper, newProjectTitleInput, newProjectSubmit, cancelNewProjectForm);
 
+    newProjectsForm.appendChild(projectFormWrapper);
 };
 
 //Function that renders the project into the DOM to be 

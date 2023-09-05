@@ -15,7 +15,7 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     const taskTitleInput = document.createElement('input');
     const taskDescriptionInput = document.createElement('input');
     const taskDueDateInput = document.createElement('input');
-    const taskPriorityInput = document.createElement('input');
+    const taskPriorityInput = document.createElement('select');
 
     //Assign all of the field elements a class name
     taskFormWrapper.className = 'task form';
@@ -35,6 +35,18 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     taskDescriptionInput.id = 'task-description-input';
     taskDueDateInput.id = 'task-due-date-input';
     taskPriorityInput.id = 'task-priority-input';
+
+    //Assign options to the priority drop down field
+    const highPriority = document.createElement('option');
+    const mediumPriority = document.createElement('option');
+    const lowPriority = document.createElement('option');
+
+    highPriority.innerText = 'High Priority';
+    mediumPriority.innerText = 'Medium Priority';
+    lowPriority.innerText = 'Low Priority';
+
+    appendChildren(taskPriorityInput, highPriority, mediumPriority, lowPriority);
+
 
     //Create the button elements for the form
     const newTaskSubmitBtn = document.createElement('button');
