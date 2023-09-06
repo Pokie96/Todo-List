@@ -23,6 +23,7 @@ export const openProjectForm = function(arrayToSubmit){
 
     //Create the field elements for the form
     const projectFormWrapper = document.createElement('div');
+    const buttonsWrapper = document.createElement('div');
     const newProjectTitleInput = document.createElement('input');
     const newProjectSubmit = document.createElement('button');
     const cancelNewProjectForm = document.createElement('button');
@@ -36,6 +37,7 @@ export const openProjectForm = function(arrayToSubmit){
     
     //Assign classes to the elements
     projectFormWrapper.className = 'project-form-wrapper';
+    buttonsWrapper.className = 'project-form-buttons-wrapper';
     newProjectTitleInput.className = 'new-project-title-input';
     newProjectSubmit.className = 'new-project-submit';
     cancelNewProjectForm.className = 'cancel-new-project';
@@ -56,7 +58,8 @@ export const openProjectForm = function(arrayToSubmit){
     const newProjectsForm = document.querySelector('.new-projects-form');
 
     //Attach the form to the previous element
-    appendChildren(projectFormWrapper, newProjectTitleInput, newProjectSubmit, cancelNewProjectForm);
+    appendChildren(buttonsWrapper, newProjectSubmit, cancelNewProjectForm);
+    appendChildren(projectFormWrapper, newProjectTitleInput, buttonsWrapper);
 
     newProjectsForm.appendChild(projectFormWrapper);
 };

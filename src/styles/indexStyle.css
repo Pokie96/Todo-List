@@ -40,6 +40,8 @@ body{
     box-shadow: 1px 1px 3px #CDCDCD, 1px 1px 3px inset #CDCDCD;
     color: #DFF8EB;
     font-weight: bolder;
+    cursor: pointer;
+    height: 30px;
 }
 
 .projects-container{
@@ -76,6 +78,7 @@ body{
     margin-right: 10px;
 }
 
+
 .header h1{
     color: #DFF8EB;
 }
@@ -103,13 +106,35 @@ body{
     box-shadow: 1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB;
 }
 
+.project-form-wrapper input{
+    height: 30px
+}
+
+.project-form-wrapper input:focus{
+    box-shadow: 1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB;
+}
+
 .project-form-wrapper button{
     width: 60px;
+    height: 30px;
     border: none;
     border-radius: 5px;
     background-color: #011638;
     color: #DFF8EB;
     font-weight: bolder;
+    cursor: pointer;
+}
+
+.project-form-wrapper button:hover{
+    background-color: #022864;
+    box-shadow: 1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB;
+}
+
+.project-form-buttons-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .indiv-project-containers{
@@ -119,11 +144,28 @@ body{
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     box-shadow: 1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB;
     width: 90%;
-    height: 40px;
+    min-height: 40px;
     cursor: pointer;
+    padding: 5px;
+    text-align: center;
+}
+
+.project-titles{
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.project-dates{
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.remove-project-button{
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 #project-title{
@@ -158,4 +200,52 @@ body{
 .remove-project-button:hover{
     box-shadow: inset 1px 1px 2px black, inset -1px -1px 2px black;
     background-color: rgb(201, 0, 0);
+}
+
+.task-form{
+    position: fixed;
+    width: 250px;
+    height: 350px;
+    top: 50%;
+    left: 50%;
+    margin-top: -175px;
+    margin-left: -125px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #214E34;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB;
+}
+
+.new-task-buttons-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.task-form button{
+    width: 70px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #011638;
+    color: #DFF8EB;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.task-form button:hover{
+    background-color: #022864;
+    box-shadow: 1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB;
+}
+
+.task-input{
+    height: 30px
+}
+
+.task-input:focus{
+    box-shadow: 1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB;
 }

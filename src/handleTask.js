@@ -18,7 +18,7 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     const taskPriorityInput = document.createElement('select');
 
     //Assign all of the field elements a class name
-    taskFormWrapper.className = 'task form';
+    taskFormWrapper.className = 'task-form';
     taskTitleInput.className = 'task-input';
     taskDescriptionInput.className = 'task-input';
     taskDueDateInput.className = 'task-input';
@@ -49,10 +49,12 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
 
 
     //Create the button elements for the form
+    const newTaskBtns = document.createElement('div');
     const newTaskSubmitBtn = document.createElement('button');
     const newTaskCancelBtn = document.createElement('button');
 
     //Assign the button elements with a class name
+    newTaskBtns.className = 'new-task-buttons-wrapper'
     newTaskSubmitBtn.className = 'submit-task';
     newTaskCancelBtn.className = 'cancel-task';
 
@@ -62,7 +64,10 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
 
     //Add event listener to cancel and remove the form from 
     //the DOM
-    newTaskCancelBtn.addEventListener('click', removeTaskForm)
+    newTaskCancelBtn.addEventListener('click', ()=> {
+        removeTaskForm();
+        renderCreateAddTaskBtn(elementToAppendTo, currentProject);
+    })
 
     //Add event listener to render the task to submit button
     newTaskSubmitBtn.addEventListener('click', () => {
@@ -73,7 +78,8 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     });
 
     //Append the field elements to the given container element
-    appendChildren(taskFormWrapper, taskTitleInput, taskDescriptionInput, taskDueDateInput, taskPriorityInput, newTaskSubmitBtn, newTaskCancelBtn);
+    appendChildren(newTaskBtns, newTaskSubmitBtn, newTaskCancelBtn);
+    appendChildren(taskFormWrapper, taskTitleInput, taskDescriptionInput, taskDueDateInput, taskPriorityInput, newTaskBtns);
 
     //Append the form to after the "Add Task Button";
     addTaskBtn.parentNode.insertBefore(taskFormWrapper, addTaskBtn.nextSibling);
@@ -83,26 +89,15 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
 //Function that removes all of the form elements from the DOM
 export const removeTaskForm = function(){
     //Select all of the form elements using their class name
-    const taskInputs = document.querySelectorAll('.task-input');
-    const taskSubmitBtn = document.querySelector('.submit-task');
-    const taskCancelBtn = document.querySelector('.cancel-task');
+    const taskForm = document.querySelector('.task-form');
 
     //For every field input in the list of field inputs
-    if(!taskInputs){
+    if(!taskForm){
         return;
     }else{
-        for(let i = 0; i < taskInputs.length; i++){
-            //Remove the field input
-            taskInputs[i].remove();
-        }
+        taskForm.remove();
     };
 
-    if(!taskSubmitBtn){
-        return;
-    }else{
-        taskSubmitBtn.remove();
-        taskCancelBtn.remove();
-    };
 };
 
 //Function to render the tasks of a project on to the DOM
