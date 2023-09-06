@@ -140,7 +140,7 @@ export const renderNewProjectBtn = function(projectArray){
     });
 
     //Append the button back to the correct div
-    const buttonContainer = document.querySelector('.new-projects-form');
+    const buttonContainer = document.querySelector('.new-project-button-wrapper');
     buttonContainer.appendChild(newProjectBtn);
 
     removeAllTasksDOM();
