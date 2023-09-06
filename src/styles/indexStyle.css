@@ -121,4 +121,26 @@ body{
     margin-bottom: 5px;
     box-shadow: 1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB;
     width: 90%;
+    height: 40px;
+    cursor: pointer;
+}
+
+#project-title{
+    text-align: center;
+    color: #DFF8EB;
+    font-size: 32px;
+    text-decoration: underline;
+    text-shadow: 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+}
+
+.add-task-button{
+    background-color: #214E34;
+    border: none;
+    box-shadow: 1px 1px 3px #CDCDCD, 1px 1px 3px inset #CDCDCD;
+    color: #DFF8EB;
+    font-weight: bolder;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 80px;
+    height: 40px;
 }

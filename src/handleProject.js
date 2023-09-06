@@ -11,7 +11,7 @@ export const closeProjectForm = function(projectsList){
 
     //Remove the form input fields
     projectFormWrapper.remove();
-    
+
     //Re-Render the "New Project" button for use again
     renderNewProjectBtn(projectsList);
 
@@ -83,6 +83,7 @@ export const renderProject = function(array, container){
 
         //Give the project elements class names for future styling
         projectElement.className = 'indiv-project-containers';
+        projectElement.id = `project-${i}`;
         projectTitle.className = 'project-titles';
         projectDate.className = 'project-dates';
 
@@ -96,13 +97,13 @@ export const renderProject = function(array, container){
         //Render the Add Task Button
         //renderCreateAddTaskBtn(projectElement, project);
 
-        projectTitle.addEventListener('click', () => {
+        projectElement.addEventListener('click', (event) => {
             removeAllTasksDOM();
             removeAddTaskButton();
             removeTaskForm();
             renderCreateAddTaskBtn(document.querySelector('.to-do-list-container'),project);
             renderTasks(project);
-            setActiveProject(projectTitle);
+            setActiveProject(document.querySelector(`#project-${i}`));
         })
     }
 };
@@ -149,16 +150,21 @@ export const submitNewProject = function(projectsList){
 
     //Close the project form
     closeProjectForm(projectsList);
+
+    //Remove any currently active project title and task 
+    //creation button
+    removeAddTaskButton();
+    document.querySelector('#project-title').innerText = '';
 };
 
 //A function to show which project is currently chosen.
 export const setActiveProject = function(currentProject){
-    const allProjectTitles = document.querySelectorAll('.project-titles');
+    const allProjectElements = document.querySelectorAll('.indiv-project-containers');
     const projectTitle = document.querySelector("#project-title");
     projectTitle.innerText = '';
-    projectTitle.innerText = currentProject.textContent;
-    for(let project of allProjectTitles){
-        project.style.color = 'black';
+    projectTitle.innerText = currentProject.firstChild.textContent;
+    for(let project of allProjectElements){
+        project.style.boxShadow = '1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB';
     }
-    currentProject.style.color = 'pink';
+    currentProject.style.boxShadow = 'inset 1px 1px 3px black, inset -1px -1px 3px black';
 };
