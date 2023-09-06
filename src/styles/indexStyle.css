@@ -1,6 +1,7 @@
 *{
     box-sizing: border-box;
     margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 body{
@@ -151,4 +152,10 @@ body{
     color: white;;
     font-weight: bolder;
     border-radius: 6px;
+    cursor: pointer;
+}
+
+.remove-project-button:hover{
+    box-shadow: inset 1px 1px 2px black, inset -1px -1px 2px black;
+    background-color: rgb(201, 0, 0);
 }
