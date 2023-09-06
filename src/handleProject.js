@@ -75,36 +75,51 @@ export const renderProject = function(array, container){
         let projectElement = document.createElement('div');
         let projectTitle = document.createElement('h2');
         let projectDate = document.createElement('p');
+        let removeProjectBtn = document.createElement('button');
+        const controller = new Controller;
 
         //Set inner text of the elements to the values inside
         //of the given objects
         projectTitle.innerText = project.title;
         projectDate.innerText = project.date;
+        removeProjectBtn.innerText = 'X';
 
         //Give the project elements class names for future styling
         projectElement.className = 'indiv-project-containers';
         projectElement.id = `project-${i}`;
         projectTitle.className = 'project-titles';
         projectDate.className = 'project-dates';
+        removeProjectBtn.className = 'remove-project-button';
+        removeProjectBtn.id = `remove-project-button-${i}`;
+
+        //Render the Add Task Button
+        //renderCreateAddTaskBtn(projectElement, project);
+
+        projectElement.addEventListener('click', (e) => {
+            if(e.target === document.querySelector(`#remove-project-button-${i}`)){
+                controller.deleteProject(project);
+                renderProject(array, container);
+                renderTasks(project);
+                removeAddTaskButton();
+                removeAllTasksDOM();
+                document.querySelector('#project-title').innerText = '';
+            }else{
+                removeAllTasksDOM();
+                removeAddTaskButton();
+                removeTaskForm();
+                renderCreateAddTaskBtn(document.querySelector('.to-do-list-container'),project);
+                renderTasks(project);
+                setActiveProject(document.querySelector(`#project-${i}`));
+            }
+        })
 
         //Append the child elements to their parent element
-        appendChildren(projectElement, projectTitle, projectDate)
+        appendChildren(projectElement, projectTitle, projectDate, removeProjectBtn);
 
 
         //Append the div to the given container
         container.appendChild(projectElement);
 
-        //Render the Add Task Button
-        //renderCreateAddTaskBtn(projectElement, project);
-
-        projectElement.addEventListener('click', (event) => {
-            removeAllTasksDOM();
-            removeAddTaskButton();
-            removeTaskForm();
-            renderCreateAddTaskBtn(document.querySelector('.to-do-list-container'),project);
-            renderTasks(project);
-            setActiveProject(document.querySelector(`#project-${i}`));
-        })
     }
 };
 
@@ -162,9 +177,12 @@ export const setActiveProject = function(currentProject){
     const allProjectElements = document.querySelectorAll('.indiv-project-containers');
     const projectTitle = document.querySelector("#project-title");
     projectTitle.innerText = '';
-    projectTitle.innerText = currentProject.firstChild.textContent;
+    
     for(let project of allProjectElements){
         project.style.boxShadow = '1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB';
     }
-    currentProject.style.boxShadow = 'inset 1px 1px 3px black, inset -1px -1px 3px black';
+    if(currentProject){
+        projectTitle.innerText = currentProject.firstChild.textContent;
+        currentProject.style.boxShadow = 'inset 1px 1px 3px black, inset -1px -1px 3px black';
+    };
 };
