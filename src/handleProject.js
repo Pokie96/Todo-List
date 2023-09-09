@@ -186,6 +186,6 @@ export const setActiveProject = function(currentProject){
     }
     if(currentProject){
         projectTitle.innerText = currentProject.firstChild.textContent;
-        currentProject.style.boxShadow = 'inset 1px 1px 3px black, inset -1px -1px 3px black';
+        currentProject.style.boxShadow = 'inset 4px 4px 6px black, inset -4px -4px 6px black, 1px 1px 3px #DFF8EB,-1px -1px 3px #DFF8EB';
     };
 };
