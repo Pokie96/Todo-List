@@ -72,7 +72,7 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     //Add event listener to render the task to submit button
     newTaskSubmitBtn.addEventListener('click', () => {
         addTaskToProject(currentProject);
-        renderCreateAddTaskBtn(document.querySelector('.to-do-list-container') ,currentProject)
+        renderCreateAddTaskBtn(document.querySelector('.task-section-header') ,currentProject)
         renderTasks(currentProject);
         removeTaskForm();
     });
@@ -140,6 +140,7 @@ export const renderTasks = function(project){
         //styling.
         assignClass('task-properties', title, description, dueDate, priority)
         taskWrapper.className = 'task-wrapper';
+        taskDeleteBtn.className = 'task-delete-button';
 
         //Append all of the new elements to the container
         //for this to do object
@@ -152,8 +153,6 @@ export const renderTasks = function(project){
 export const renderTaskCheckBox = function(thisTask, taskArray){
     //Create wrapper for check
     const taskCheck = document.createElement('div');
-
-    console.log(taskArray.indexOf(thisTask));
     
     //Create the checkbox element
     const taskCheckBox = document.createElement('input');
@@ -163,13 +162,19 @@ export const renderTaskCheckBox = function(thisTask, taskArray){
     //Create the label for the checkbox
     const taskCheckBoxLabel = document.createElement('label');
     taskCheckBoxLabel.setAttribute('for', `${thisTask.title + (taskArray.indexOf(thisTask))}-check-box`);
-    taskCheckBox.innerText = 'Completed?';
+    taskCheckBoxLabel.innerText = 'Completed?';
 
     //Event listener for checkbox
     taskCheckBox.addEventListener('change', ()=> {
         thisTask.changeCompleteStatus();
         console.log(thisTask);
     });
+
+    if(thisTask.complete === true){
+        taskCheckBox.checked = true;
+    };
+
+    taskCheck.className = 'task-check-wrapper';
 
     //Append elements to the wrapper
     appendChildren(taskCheck, taskCheckBoxLabel, taskCheckBox);
@@ -192,7 +197,7 @@ export const renderDeleteTaskBtn = function(thisProject, thisTask){
 
 //Function creates our "Add Task Button" given a parent element
 //to append to.
-export const renderCreateAddTaskBtn = function(elementToAppendTo, currentProject){
+export const renderCreateAddTaskBtn = function(elementToPrependTo, currentProject){
     //Create the button element with text.
     const addTaskBtn = document.createElement('button');
     addTaskBtn.innerText = 'Add Task';
@@ -203,12 +208,12 @@ export const renderCreateAddTaskBtn = function(elementToAppendTo, currentProject
     //Add the event listener to the button which opens the 
     //"Task Form" on the element that was given.
     addTaskBtn.addEventListener('click', () => {
-     openTaskForm(elementToAppendTo, currentProject)
+     openTaskForm(elementToPrependTo, currentProject)
      removeAddTaskButton();
     })
 
     //Append the button to the given element.
-    elementToAppendTo.appendChild(addTaskBtn);
+    elementToPrependTo.prepend(addTaskBtn);
 };
 
 //Function to add a "Task" to a project's task array.
