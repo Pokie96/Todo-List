@@ -1,4 +1,4 @@
-import { appendChildren } from "./helperFunction";
+import { appendChildren, todaysDate } from "./helperFunction";
 import { Project } from "./classes";
 import { renderCreateAddTaskBtn, renderTasks, removeAllTasksDOM, removeAddTaskButton, removeTaskForm } from "./handleTask";
 import { Controller } from "./classes";
@@ -156,7 +156,7 @@ export const submitNewProject = function(projectsList){
 
     //Create a new project with the given title, date and projectsList
     //to store it
-    const newProject = new Project(newProjectTitle, 2023);
+    const newProject = new Project(newProjectTitle, todaysDate());
 
     const controller = new Controller();
     

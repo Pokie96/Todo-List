@@ -13,3 +13,14 @@ export const assignClass = function(className, ...elements){
         elements[i].className = className;
     };
 };
+
+export const todaysDate = function(){
+    const fullDate = new Date();
+
+    let day = fullDate.getDate();
+    let month = fullDate.getMonth() + 1;
+    let year = fullDate.getFullYear();
+
+    let currentDate = `${day}/${month}/${year}`;
+    return currentDate;
+}

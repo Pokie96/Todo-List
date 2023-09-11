@@ -10,12 +10,59 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     //form after
     const addTaskBtn = document.querySelector('.add-task-button');
 
-    //Create all of the field elements required for a task
+    //Create all of the field elements and their wrappers 
+    //required for a task
     const taskFormWrapper = document.createElement('div');
+
+    const taskTitleWrapper = document.createElement('div');
+    const taskTitleLabel = document.createElement('label');
     const taskTitleInput = document.createElement('input');
+
+    const taskDescriptionWrapper = document.createElement('div');
+    const taskDescriptionLabel = document.createElement('label');
     const taskDescriptionInput = document.createElement('input');
+
+    const taskDueDateWrapper = document.createElement('div');
+    const taskDueDateLabel = document.createElement('label');
     const taskDueDateInput = document.createElement('input');
+
+    const taskPriorityWrapper = document.createElement('div');
+    const taskPriorityLabel = document.createElement('label');
     const taskPriorityInput = document.createElement('select');
+
+    //Assign options to the priority drop down field
+    const highPriority = document.createElement('option');
+    const mediumPriority = document.createElement('option');
+    const lowPriority = document.createElement('option');
+
+    //Set the attributes for the due date elements in the form
+    taskTitleInput.setAttribute("name", "title-input");
+    taskTitleLabel.setAttribute("for", "title-input");
+
+    taskDescriptionInput.setAttribute("name", "description-input");
+    taskDescriptionLabel.setAttribute("for", "description-input");
+
+    taskDueDateInput.setAttribute("name", "due-date-input");
+    taskDueDateInput.setAttribute("type", "date");
+    taskDueDateLabel.setAttribute("for", "due-date-input");
+
+    taskPriorityInput.setAttribute("name", "priority-input");
+    taskPriorityLabel.setAttribute("for", "priority-input");
+
+    //Set the label values
+    taskTitleLabel.innerText = "Title:";
+    taskDescriptionLabel.innerText = "Description:";
+    taskDueDateLabel.innerText = "Due Date:";
+    taskPriorityLabel.innerText = "Priority Level";
+
+    //Assign a class to the field element wrappers
+    assignClass("field-element-wrapper", taskTitleWrapper, taskDescriptionWrapper, taskDueDateWrapper, taskPriorityWrapper);
+
+    //Append any elements to their wrappers
+    appendChildren(taskTitleWrapper, taskTitleLabel, taskTitleInput);
+    appendChildren(taskDescriptionWrapper, taskDescriptionLabel, taskDescriptionInput);
+    appendChildren(taskDueDateWrapper, taskDueDateLabel, taskDueDateInput);
+    appendChildren(taskPriorityWrapper, taskPriorityLabel, taskPriorityInput);
 
     //Assign all of the field elements a class name
     taskFormWrapper.className = 'task-form';
@@ -36,10 +83,6 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     taskDueDateInput.id = 'task-due-date-input';
     taskPriorityInput.id = 'task-priority-input';
 
-    //Assign options to the priority drop down field
-    const highPriority = document.createElement('option');
-    const mediumPriority = document.createElement('option');
-    const lowPriority = document.createElement('option');
 
     highPriority.innerText = 'High Priority';
     mediumPriority.innerText = 'Medium Priority';
@@ -79,7 +122,7 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
 
     //Append the field elements to the given container element
     appendChildren(newTaskBtns, newTaskSubmitBtn, newTaskCancelBtn);
-    appendChildren(taskFormWrapper, taskTitleInput, taskDescriptionInput, taskDueDateInput, taskPriorityInput, newTaskBtns);
+    appendChildren(taskFormWrapper, taskTitleWrapper, taskDescriptionWrapper, taskDueDateWrapper, taskPriorityWrapper, newTaskBtns);
 
     //Append the form to after the "Add Task Button";
     addTaskBtn.parentNode.insertBefore(taskFormWrapper, addTaskBtn.nextSibling);
