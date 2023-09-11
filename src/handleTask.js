@@ -1,5 +1,4 @@
-import { appendChildren } from "./helperFunction";
-import { assignClass } from "./helperFunction";
+import { appendChildren, assignClass, reformatDate} from "./helperFunction";
 
 //Function to create the form used for new tasks.
 //Requires an argument for the element the form will be 
@@ -176,7 +175,7 @@ export const renderTasks = function(project){
         //properties
         title.innerText = currentTask.title;
         description.innerText = currentTask.description;
-        dueDate.innerText = currentTask.dueDate;
+        dueDate.innerText = reformatDate(currentTask.dueDate);
         priority.innerText = currentTask.priority;
 
         //Assign a class name to these elements for future
