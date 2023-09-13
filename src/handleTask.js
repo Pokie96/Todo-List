@@ -1,4 +1,5 @@
-import { appendChildren, assignClass, reformatDate} from "./helperFunction";
+import { appendChildren, assignClass, findThisWeek, reformatDate, reformatThisWeek} from "./helperFunction";
+import { Controller } from "./classes";
 
 //Function to create the form used for new tasks.
 //Requires an argument for the element the form will be 
@@ -287,3 +288,57 @@ export const removeAddTaskButton = function(){
         addTaskButton.remove();
     };
 }
+
+//Function which renders all the tasks which are due for this week.
+export const findTasksForWeek = function(){
+    const controller = new Controller();
+    const projectsArray = controller.getProjectsArray();
+    const datesInThisWeek = reformatThisWeek(findThisWeek());
+
+    removeAllTasksDOM();
+
+    for(let i = 0; i < projectsArray.length; i++){
+        let taskList = projectsArray[i].taskList;
+        for(let j = 0; j < taskList.length; j++){
+            if(datesInThisWeek.includes(reformatDate(taskList[j].dueDate))){
+                renderIndividualTask(taskList[j], taskList, projectsArray[i]);
+            }
+        }
+    }
+}
+
+//Function renders a given individual task onto the DOM
+export const renderIndividualTask = function(task, taskList, project){
+    const tasksContainer = document.querySelector(".to-do-list-container")
+
+    //Initialize all of the variables that will be 
+    //used through the function to their dom elements
+    const taskWrapper = document.createElement('div');
+    const title = document.createElement('p');
+    const description = document.createElement('p');
+    const dueDate = document.createElement('p');
+    const priority = document.createElement('p');
+    const check = renderTaskCheckBox(task, taskList);
+    const taskDeleteBtn = renderDeleteTaskBtn(project, task);
+
+
+    //Append text to elements from their respective 
+    //properties
+    title.innerText = task.title;
+    description.innerText = task.description;
+    dueDate.innerText = reformatDate(task.dueDate);
+    priority.innerText = task.priority;
+
+    //Assign a class name to these elements for future
+    //styling.
+    assignClass('task-properties', title, description, dueDate, priority)
+    taskWrapper.className = 'task-wrapper';
+    taskDeleteBtn.className = 'task-delete-button';
+
+    //Append all of the new elements to the container
+    //for this to do object
+    appendChildren(taskWrapper, title, description, dueDate, priority, check, taskDeleteBtn);
+    tasksContainer.appendChild(taskWrapper)
+}
+
+

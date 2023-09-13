@@ -1,3 +1,5 @@
+import { addDays } from "date-fns";
+
 
 //Function to help append multiple children at once to a parent
 //element
@@ -31,6 +33,46 @@ export const todaysDate = function(){
 //This function gets a date created from the date input and reformats 
 //it to be more suitable for display on the page
 export const reformatDate = function(date){
-    return date.split("-").reverse().join("-");
+    const reformattedDate =  date.split("-").reverse().join("/");
+    const newReformattedDate = removeCharacter(4, reformattedDate);
+    return newReformattedDate;
 }
     
+export const findThisWeek = function(){
+    const dateArray = [];
+    const date = new Date();
+    let nextDay = addDays(date, 1);
+
+    dateArray.push(date, nextDay);
+
+    while(nextDay.getDay() !== 0){
+        nextDay = addDays(nextDay, 1);
+        dateArray.push(nextDay);
+    }
+
+    return dateArray;
+};
+
+export const reformatThisWeek = function(week){
+    const weekDayArray = [];
+    for(let i = 0; i < week.length; i++){
+        let day = week[i].getDate();
+        let month = week[i].getMonth() + 1;
+        let year = week[i].getFullYear();
+
+        let thisFullDay = `${day}/${month}/${year}`;
+        
+        weekDayArray.push(thisFullDay);
+    }
+    return weekDayArray;
+}
+
+export const removeCharacter = function(position, date) {
+    let newString =
+        date.substr(0, position - 1)+
+        date.substr(
+            position,
+            date.length
+        );
+    return newString;
+};
