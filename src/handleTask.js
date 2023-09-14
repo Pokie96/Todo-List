@@ -1,4 +1,4 @@
-import { appendChildren, assignClass, findThisWeek, reformatDate, reformatThisWeek} from "./helperFunction";
+import { appendChildren, assignClass, findThisMonth, findThisWeek, reformatDate, reformatThisMonth, reformatThisWeek, todaysDate} from "./helperFunction";
 import { Controller } from "./classes";
 
 //Function to create the form used for new tasks.
@@ -192,6 +192,40 @@ export const renderTasks = function(project){
     };
 };
 
+//Function renders a given individual task onto the DOM
+export const renderIndividualTask = function(task, taskList, project){
+    const tasksContainer = document.querySelector(".to-do-list-container")
+
+    //Initialize all of the variables that will be 
+    //used through the function to their dom elements
+    const taskWrapper = document.createElement('div');
+    const title = document.createElement('p');
+    const description = document.createElement('p');
+    const dueDate = document.createElement('p');
+    const priority = document.createElement('p');
+    const check = renderTaskCheckBox(task, taskList);
+    const taskDeleteBtn = renderDeleteTaskBtn(project, task);
+
+
+    //Append text to elements from their respective 
+    //properties
+    title.innerText = task.title;
+    description.innerText = task.description;
+    dueDate.innerText = reformatDate(task.dueDate);
+    priority.innerText = task.priority;
+
+    //Assign a class name to these elements for future
+    //styling.
+    assignClass('task-properties', title, description, dueDate, priority)
+    taskWrapper.className = 'task-wrapper';
+    taskDeleteBtn.className = 'task-delete-button';
+
+    //Append all of the new elements to the container
+    //for this to do object
+    appendChildren(taskWrapper, title, description, dueDate, priority, check, taskDeleteBtn);
+    tasksContainer.appendChild(taskWrapper)
+}
+
 //Function creates and return the checkbox for each task
 export const renderTaskCheckBox = function(thisTask, taskArray){
     //Create wrapper for check
@@ -289,13 +323,16 @@ export const removeAddTaskButton = function(){
     };
 }
 
-//Function which renders all the tasks which are due for this week.
+//Function finds and renders all of the tasks that are due for this week.
 export const findTasksForWeek = function(){
     const controller = new Controller();
     const projectsArray = controller.getProjectsArray();
     const datesInThisWeek = reformatThisWeek(findThisWeek());
+    const title = document.querySelector('#project-title');
 
     removeAllTasksDOM();
+
+    title.innerText = 'Due This Week';
 
     for(let i = 0; i < projectsArray.length; i++){
         let taskList = projectsArray[i].taskList;
@@ -307,38 +344,46 @@ export const findTasksForWeek = function(){
     }
 }
 
-//Function renders a given individual task onto the DOM
-export const renderIndividualTask = function(task, taskList, project){
-    const tasksContainer = document.querySelector(".to-do-list-container")
+//Function finds and renders all of the tasks that are due for today
+export const findTasksForToday = function(){
+    const controller = new Controller();
+    const projectsArray = controller.getProjectsArray();
+    const today = todaysDate();
+    const title = document.querySelector('#project-title');
 
-    //Initialize all of the variables that will be 
-    //used through the function to their dom elements
-    const taskWrapper = document.createElement('div');
-    const title = document.createElement('p');
-    const description = document.createElement('p');
-    const dueDate = document.createElement('p');
-    const priority = document.createElement('p');
-    const check = renderTaskCheckBox(task, taskList);
-    const taskDeleteBtn = renderDeleteTaskBtn(project, task);
+    removeAllTasksDOM();
 
+    title.innerText = 'Due Today';
 
-    //Append text to elements from their respective 
-    //properties
-    title.innerText = task.title;
-    description.innerText = task.description;
-    dueDate.innerText = reformatDate(task.dueDate);
-    priority.innerText = task.priority;
+    for(let i = 0; i < projectsArray.length; i++){
+        let taskList = projectsArray[i].taskList;
+        for(let j = 0; j < taskList.length; j++){
+            if(today === reformatDate(taskList[j].dueDate)){
+                renderIndividualTask(taskList[j], taskList, projectsArray[i]);
+            }
+        }
+    }
+};
 
-    //Assign a class name to these elements for future
-    //styling.
-    assignClass('task-properties', title, description, dueDate, priority)
-    taskWrapper.className = 'task-wrapper';
-    taskDeleteBtn.className = 'task-delete-button';
+//Function finds and renders all of the tasks that are due for this month
+export const findTasksForMonth = function(){
+    const controller = new Controller();
+    const projectsArray = controller.getProjectsArray();
+    const datesInThisMonth = reformatThisMonth(findThisMonth());
+    const title = document.querySelector('#project-title');
 
-    //Append all of the new elements to the container
-    //for this to do object
-    appendChildren(taskWrapper, title, description, dueDate, priority, check, taskDeleteBtn);
-    tasksContainer.appendChild(taskWrapper)
+    removeAllTasksDOM();
+
+    title.innerText = 'Due This Month';
+
+    for(let i = 0; i < projectsArray.length; i++){
+        let taskList = projectsArray[i].taskList;
+        for(let j = 0; j < taskList.length; j++){
+            if(datesInThisMonth.includes(reformatDate(taskList[j].dueDate))){
+                renderIndividualTask(taskList[j], taskList, projectsArray[i]);
+            }
+        }
+    }
 }
 
 
