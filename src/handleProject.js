@@ -1,7 +1,7 @@
 import { appendChildren, todaysDate } from "./helperFunction";
 import { Project } from "./classes";
-import { renderCreateAddTaskBtn, renderTasks, removeAllTasksDOM, removeAddTaskButton, removeTaskForm } from "./handleTask";
-import { Controller } from "./classes";
+import { renderCreateAddTaskBtn, renderProjectTasks, removeAllTasksDOM, removeAddTaskButton, removeTaskForm } from "./handleTask";
+import { Controller, Storer} from "./classes";
 
 //A function to close the form that will be used in other 
 //functions within this module
@@ -102,16 +102,17 @@ export const renderProject = function(array, container){
             if(e.target === document.querySelector(`#remove-project-button-${i}`)){
                 controller.deleteProject(project);
                 renderProject(array, container);
-                renderTasks(project);
+                renderProjectTasks(project);
                 removeAddTaskButton();
                 removeAllTasksDOM();
                 document.querySelector('#project-title').innerText = '';
             }else{
+                Storer.currentlySelected = 'Project';
                 removeAllTasksDOM();
                 removeAddTaskButton();
                 removeTaskForm();
                 renderCreateAddTaskBtn(document.querySelector('.add-task-btn-wrapper'),project);
-                renderTasks(project);
+                renderProjectTasks(project);
                 setActiveProject(document.querySelector(`#project-${i}`));
             }
         })

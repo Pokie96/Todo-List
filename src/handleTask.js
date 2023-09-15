@@ -1,5 +1,5 @@
 import { appendChildren, assignClass, findThisMonth, findThisWeek, reformatDate, reformatThisMonth, reformatThisWeek, todaysDate} from "./helperFunction";
-import { Controller } from "./classes";
+import { Controller , Storer} from "./classes";
 
 //Function to create the form used for new tasks.
 //Requires an argument for the element the form will be 
@@ -116,7 +116,7 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     newTaskSubmitBtn.addEventListener('click', () => {
         addTaskToProject(currentProject);
         renderCreateAddTaskBtn(document.querySelector('.task-section-header') ,currentProject)
-        renderTasks(currentProject);
+        chooseRenderType('Project', currentProject);
         removeTaskForm();
     });
 
@@ -145,7 +145,7 @@ export const removeTaskForm = function(){
 
 //Function to render the tasks of a project on to the DOM
 //to be displayed on the page
-export const renderTasks = function(project){
+export const renderProjectTasks = function(project){
     //First the tasks container must be emptied
     removeAllTasksDOM()
 
@@ -153,42 +153,13 @@ export const renderTasks = function(project){
     //project.
     let taskList = project.taskList;
 
-    //Select the container in HTML document where tasks will
-    //be appended to.
-    const tasksContainer = document.querySelector('.to-do-list-container')
-
     //Loop through the key arrays to find any to do keys inside 
     //of the projects.
     for(let i = 0; i < taskList.length; i++){
         let currentTask = taskList[i];
         //Initialize all of the variables that will be 
         //used through the function to their dom elements
-        const taskWrapper = document.createElement('div');
-        const title = document.createElement('p');
-        const description = document.createElement('p');
-        const dueDate = document.createElement('p');
-        const priority = document.createElement('p');
-        const check = renderTaskCheckBox(currentTask, taskList);
-        const taskDeleteBtn = renderDeleteTaskBtn(project, currentTask);
-
-
-        //Append text to elements from their respective 
-        //properties
-        title.innerText = currentTask.title;
-        description.innerText = currentTask.description;
-        dueDate.innerText = reformatDate(currentTask.dueDate);
-        priority.innerText = currentTask.priority;
-
-        //Assign a class name to these elements for future
-        //styling.
-        assignClass('task-properties', title, description, dueDate, priority)
-        taskWrapper.className = 'task-wrapper';
-        taskDeleteBtn.className = 'task-delete-button';
-
-        //Append all of the new elements to the container
-        //for this to do object
-        appendChildren(taskWrapper, title, description, dueDate, priority, check, taskDeleteBtn);
-        tasksContainer.appendChild(taskWrapper)
+        renderIndividualTask(currentTask, taskList, project)
     };
 };
 
@@ -224,7 +195,7 @@ export const renderIndividualTask = function(task, taskList, project){
     //for this to do object
     appendChildren(taskWrapper, title, description, dueDate, priority, check, taskDeleteBtn);
     tasksContainer.appendChild(taskWrapper)
-}
+};
 
 //Function creates and return the checkbox for each task
 export const renderTaskCheckBox = function(thisTask, taskArray){
@@ -258,7 +229,7 @@ export const renderTaskCheckBox = function(thisTask, taskArray){
 
     return taskCheck;
 
-}
+};
 
 //Function creates and returns the 'delete button' which will 
 //be used of each task
@@ -266,8 +237,10 @@ export const renderDeleteTaskBtn = function(thisProject, thisTask){
     const deleteTaskBtn = document.createElement('button');
     deleteTaskBtn.innerText = 'X';
     deleteTaskBtn.addEventListener('click', ()=>{
+        let currentRenderType = Storer.currentlySelected;
+        console.log(currentRenderType);
         thisProject.removeTask(thisTask);
-        renderTasks(thisProject);
+        chooseRenderType(currentRenderType, thisProject);
     })
     return deleteTaskBtn;
 };
@@ -305,7 +278,7 @@ export const addTaskToProject = function(project){
     } else{
         project.addTask(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value)
     };
-}
+};
 
 //Function to remove all tasks from the screen.
 export const removeAllTasksDOM = function(){
@@ -313,7 +286,7 @@ export const removeAllTasksDOM = function(){
     for (let task of displayedTasks){
         task.remove();
     };
-}
+};
 
 //Function removed the 'Add Task' button from the DOM
 export const removeAddTaskButton = function(){
@@ -321,10 +294,10 @@ export const removeAddTaskButton = function(){
     if(addTaskButton){
         addTaskButton.remove();
     };
-}
+};
 
 //Function finds and renders all of the tasks that are due for this week.
-export const findTasksForWeek = function(){
+export const renderTasksForWeek = function(){
     const controller = new Controller();
     const projectsArray = controller.getProjectsArray();
     const datesInThisWeek = reformatThisWeek(findThisWeek());
@@ -342,10 +315,10 @@ export const findTasksForWeek = function(){
             }
         }
     }
-}
+};
 
 //Function finds and renders all of the tasks that are due for today
-export const findTasksForToday = function(){
+export const renderTasksForToday = function(){
     const controller = new Controller();
     const projectsArray = controller.getProjectsArray();
     const today = todaysDate();
@@ -366,7 +339,7 @@ export const findTasksForToday = function(){
 };
 
 //Function finds and renders all of the tasks that are due for this month
-export const findTasksForMonth = function(){
+export const renderTasksForMonth = function(){
     const controller = new Controller();
     const projectsArray = controller.getProjectsArray();
     const datesInThisMonth = reformatThisMonth(findThisMonth());
@@ -384,6 +357,20 @@ export const findTasksForMonth = function(){
             }
         }
     }
-}
+};
 
+export const chooseRenderType = function(selectedTasksType, project){
+    if(selectedTasksType === 'Today'){
+        renderTasksForToday();
+    } else if(selectedTasksType === 'Week'){
+        renderTasksForWeek();
+    } else if(selectedTasksType === 'Month'){
+        renderTasksForMonth();
+    } else if(selectedTasksType === 'Project'){
+        renderProjectTasks(project)
+    }
+};
 
+export const checkTaskType = function(){
+
+};

@@ -55,3 +55,17 @@ export class Controller {
     };
     
 };
+
+export class Storer {
+    constructor(){
+
+    };
+
+    static get currentlySelected() {
+        return this._currentlySelected || undefined;
+    }
+
+    static set currentlySelected(value) {
+        this._currentlySelected = value;
+    }
+};
