@@ -176,17 +176,36 @@ export const submitNewProject = function(projectsList){
     document.querySelector('#project-title').innerText = '';
 };
 
-//A function to show which project is currently chosen.
-export const setActiveProject = function(currentProject){
+//Function removes the active style effect from all the buttons of the nav 
+//in the side bar
+export const removeAllActiveButtons = function(){
     const allProjectElements = document.querySelectorAll('.indiv-project-containers');
+    const allCalenderButtons = document.querySelectorAll('.project-date-nav button');
+
+    for(let project of allProjectElements){
+        project.style.boxShadow = '1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB';
+    };
+
+    for(let calenderButton of allCalenderButtons){
+        calenderButton.style.boxShadow = '1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB';
+    };
+}
+
+//Function to show which project is currently chosen.
+export const setActiveProject = function(currentProject){
     const projectTitle = document.querySelector("#project-title");
     projectTitle.innerText = '';
     
-    for(let project of allProjectElements){
-        project.style.boxShadow = '1px 1px 3px #DFF8EB, -1px -1px 3px #DFF8EB';
-    }
+    removeAllActiveButtons()
+
     if(currentProject){
         projectTitle.innerText = currentProject.firstChild.textContent;
         currentProject.style.boxShadow = 'inset 4px 4px 6px black, inset -4px -4px 6px black, 1px 1px 3px #DFF8EB,-1px -1px 3px #DFF8EB';
     };
 };
+
+//Function shows which calender nav button is currently chosen.
+export const setActiveCalenderButton = function(button){
+    removeAllActiveButtons();
+    button.style.boxShadow = 'inset 4px 4px 6px black, inset -4px -4px 6px black, 1px 1px 3px #DFF8EB,-1px -1px 3px #DFF8EB';
+}

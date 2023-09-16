@@ -56,6 +56,7 @@ export class Controller {
     
 };
 
+//Class to store values that are shared throughout the whole of the program
 export class Storer {
     constructor(){
 

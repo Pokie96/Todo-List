@@ -359,6 +359,8 @@ export const renderTasksForMonth = function(){
     }
 };
 
+//Function makes the decision on how the tasks should be rendered (by project 
+//or time frame)
 export const chooseRenderType = function(selectedTasksType, project){
     if(selectedTasksType === 'Today'){
         renderTasksForToday();
@@ -369,8 +371,4 @@ export const chooseRenderType = function(selectedTasksType, project){
     } else if(selectedTasksType === 'Project'){
         renderProjectTasks(project)
     }
-};
-
-export const checkTaskType = function(){
-
 };
