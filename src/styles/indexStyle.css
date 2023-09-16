@@ -81,7 +81,7 @@ body{
     height: 100px;
     justify-content: space-between;
     align-items: center;
-    width: 50%;
+    width: 100%;
 
 }
 
@@ -233,6 +233,18 @@ body{
     height: 40px;
     cursor: pointer;
     margin-left: 10px;
+}
+
+#remove-complete-tasks-button{
+    background-color: #214E34;
+    border: none;
+    box-shadow: 1px 1px 3px #CDCDCD, 1px 1px 3px inset #CDCDCD;
+    color: #DFF8EB;
+    font-weight: bolder;
+    width: 140px;
+    height: 40px;
+    cursor: pointer;
+    margin-right: 10px;
 }
 
 .remove-project-button:hover{

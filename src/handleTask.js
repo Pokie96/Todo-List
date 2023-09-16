@@ -1,5 +1,6 @@
 import { appendChildren, assignClass, findThisMonth, findThisWeek, reformatDate, reformatThisMonth, reformatThisWeek, todaysDate} from "./helperFunction";
 import { Controller , Storer} from "./classes";
+import { removeAllActiveButtons } from "./handleProject";
 
 //Function to create the form used for new tasks.
 //Requires an argument for the element the form will be 
@@ -294,6 +295,25 @@ export const removeAddTaskButton = function(){
     if(addTaskButton){
         addTaskButton.remove();
     };
+};
+
+export const removeCompletedTasks = function(){
+    const controller = new Controller;
+    const allProjects = controller.getProjectsArray();
+
+    for(let i = 0; i < allProjects.length; i++){
+        const taskList = allProjects[i].taskList;
+        for(let j = 0; j < taskList.length; j++){
+            if(taskList[j].complete === true){
+                allProjects[i].removeTask(taskList[j]);
+            };
+        };
+    };
+
+    removeAllTasksDOM();
+    removeAllActiveButtons();
+    removeAddTaskButton();
+    document.querySelector('#project-title').innerText = '';
 };
 
 //Function finds and renders all of the tasks that are due for this week.
