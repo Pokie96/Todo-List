@@ -10,7 +10,9 @@ export const closeProjectForm = function(projectsList){
     const projectFormWrapper = document.querySelector('.project-form-wrapper');
 
     //Remove the form input fields
-    projectFormWrapper.remove();
+    if(projectFormWrapper){
+        projectFormWrapper.remove();
+    };
 
     //Re-Render the "New Project" button for use again
     renderNewProjectBtn(projectsList);
@@ -130,21 +132,23 @@ export const renderProject = function(array, container){
 //Function re-renders the "New Project" button again to the 
 //DOM
 export const renderNewProjectBtn = function(projectArray){
-    const newProjectBtn = document.createElement('button');
-    newProjectBtn.innerText = 'New Project';
-    newProjectBtn.id = 'new-project-button';
+    if(!document.querySelector('#new-project-button')){
+        const newProjectBtn = document.createElement('button');
+        newProjectBtn.innerText = 'New Project';
+        newProjectBtn.id = 'new-project-button';
 
-    //Add the event listener back to the "New Project" button
-    newProjectBtn.addEventListener('click', (e) => {
-        openProjectForm(projectArray);
-        e.target.remove();
-    });
+        //Add the event listener back to the "New Project" button
+        newProjectBtn.addEventListener('click', (e) => {
+            openProjectForm(projectArray);
+            e.target.remove();
+        });
 
-    //Append the button back to the correct div
-    const buttonContainer = document.querySelector('.new-project-button-wrapper');
-    buttonContainer.appendChild(newProjectBtn);
+        //Append the button back to the correct div
+        const buttonContainer = document.querySelector('.new-project-button-wrapper');
+        buttonContainer.appendChild(newProjectBtn);
 
-    removeAllTasksDOM();
+        removeAllTasksDOM();
+    };
 };
 
 //Function to create and add a new Project to a given projectsList

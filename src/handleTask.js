@@ -116,7 +116,7 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     //Add event listener to render the task to submit button
     newTaskSubmitBtn.addEventListener('click', () => {
         addTaskToProject(currentProject);
-        renderCreateAddTaskBtn(document.querySelector('.task-section-header') ,currentProject)
+        renderCreateAddTaskBtn(document.querySelector('.add-task-btn-wrapper') ,currentProject)
         chooseRenderType('Project', currentProject);
         removeTaskForm();
     });
@@ -216,7 +216,6 @@ export const renderTaskCheckBox = function(thisTask, taskArray){
     //Event listener for checkbox
     taskCheckBox.addEventListener('change', ()=> {
         thisTask.changeCompleteStatus();
-        console.log(thisTask);
     });
 
     if(thisTask.complete === true){
