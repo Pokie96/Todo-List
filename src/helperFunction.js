@@ -1,4 +1,5 @@
 import { addDays } from "date-fns";
+import { Project } from "./classes";
 
 
 //Function to help append multiple children at once to a parent
@@ -125,38 +126,3 @@ export const removeCharacter = function(position, string) {
 };
 
 
-//Function to store an array into local storage
-export const storeArrayLocal = function(keyName, array){
-    localStorage.setItem(keyName, JSON.stringify(array));
-};
-
-//Function returns an array from local storage
-export const getArrayLocal = function(keyName){
-    let array;
-    if(checkLocal(keyName) === true){
-        array = JSON.parse(localStorage.getItem(keyName));
-    } else{
-        array = [];
-    }
-    return array;
-};
-
-//Function checks for existing array stored in local storage
-//and removes it
-export const removeArrayLocal = function(keyName){
-    localStorage.removeItem(keyName);
-};
-
-//Function clears the local storage
-export const clearLocal = function(){
-    localStorage.clear();
-}
-
-//Check local storage for a key
-export const checkLocal = function(key){
-    if(key in localStorage){
-        return true;
-    } else{
-        return false;
-    }
-};
