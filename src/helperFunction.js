@@ -160,5 +160,3 @@ export const checkLocal = function(key){
         return false;
     }
 };
-
-console.log(checkLocal('Projects Array'));

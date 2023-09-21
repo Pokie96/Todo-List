@@ -116,7 +116,7 @@ export const renderProject = function(array, container){
                 removeAllTasksDOM();
                 removeAddTaskButton();
                 removeTaskForm();
-                renderCreateAddTaskBtn(document.querySelector('.add-task-btn-wrapper'),project);
+                renderCreateAddTaskBtn(document.querySelector('.add-task-btn-wrapper'), project);
                 renderProjectTasks(project);
                 setActiveProject(document.querySelector(`#project-${i}`));
             }

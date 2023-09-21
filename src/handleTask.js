@@ -11,6 +11,8 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     //form after
     const addTaskBtn = document.querySelector('.add-task-button');
 
+    console.log(currentProject);
+
     //Create all of the field elements and their wrappers 
     //required for a task
     const taskFormWrapper = document.createElement('div');
@@ -273,6 +275,8 @@ export const addTaskToProject = function(project){
     const dueDateInput = document.querySelector('#task-due-date-input');
     const priorityInput = document.querySelector('#task-priority-input');
     
+    console.log(project);
+
     if(!titleInput.value || !descriptionInput.value || !dueDateInput.value || !priorityInput.value){
         alert('All fields should be completed before submitting!');
     } else{
