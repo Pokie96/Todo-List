@@ -1,4 +1,4 @@
-import { appendChildren, todaysDate } from "./helperFunction";
+import { appendChildren, removeArrayLocal, storeArrayLocal, todaysDate } from "./helperFunction";
 import { Project } from "./classes";
 import { renderCreateAddTaskBtn, renderProjectTasks, removeAllTasksDOM, removeAddTaskButton, removeTaskForm } from "./handleTask";
 import { Controller, Storer} from "./classes";
@@ -103,6 +103,9 @@ export const renderProject = function(array, container){
         projectElement.addEventListener('click', (e) => {
             if(e.target === document.querySelector(`#remove-project-button-${i}`)){
                 controller.deleteProject(project);
+                let currentArray = controller.getProjectsArray();
+                removeArrayLocal('Projects Array');
+                storeArrayLocal('Projects Array', currentArray);
                 renderProject(array, container);
                 renderProjectTasks(project);
                 removeAddTaskButton();
@@ -167,6 +170,14 @@ export const submitNewProject = function(projectsList){
     
     //Add the project to the given projects List
     controller.addProject(newProject);
+
+    //Clear the local storage of the projects array before 
+    //creating a new modified one
+    removeArrayLocal('Projects Array');
+
+    //Store the projects array into local storage
+    let projectsArray = controller.getProjectsArray();
+    storeArrayLocal('Projects Array', projectsArray);
 
     //Render the projects in the projects list into the given container
     renderProject(projectsList, document.querySelector('.projects-container'));

@@ -1,7 +1,7 @@
-import { closeProjectForm, renderNewProjectBtn, setActiveCalenderButton } from "./handleProject";
+import { closeProjectForm, renderNewProjectBtn, renderProject, setActiveCalenderButton } from "./handleProject";
 import { Controller, Storer} from "./classes";
 import './styles/indexStyle.css';
-import { removeAddTaskButton, removeAllTasksDOM, removeCompletedTasks, removeTaskForm, renderTasksForMonth, renderTasksForToday, renderTasksForWeek } from "./handleTask";
+import { removeAddTaskButton, removeCompletedTasks, removeTaskForm, renderTasksForMonth, renderTasksForToday, renderTasksForWeek } from "./handleTask";
 
 renderNewProjectBtn(Controller.projectsArray);
 
@@ -38,5 +38,8 @@ document.querySelector('#remove-complete-tasks-button').addEventListener('click'
     removeTaskForm();
 });
 
+let controller = new Controller();
 
+console.log(controller.getProjectsArray());
 
+renderProject(controller.getProjectsArray(), document.querySelector('.projects-container'));

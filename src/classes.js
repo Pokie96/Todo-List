@@ -1,5 +1,7 @@
 //Contains the classes required for my JavaScript application
 
+import { getArrayLocal } from "./helperFunction";
+
 //A class constructor that can be used to create new projects
 export class Project {
     constructor(title, date){
@@ -40,7 +42,7 @@ export class Task {
 
 //This class has control over the collection of the projects
 export class Controller {
-    static projectsArray = [];
+    static projectsArray = getArrayLocal('Projects Array');
 
     getProjectsArray(){
         return Controller.projectsArray;
