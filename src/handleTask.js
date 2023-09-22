@@ -311,6 +311,8 @@ export const removeCompletedTasks = function(){
         for(let j = 0; j < taskList.length; j++){
             if(taskList[j].complete === true){
                 allProjects[i].removeTask(taskList[j]);
+                Storer.removeArrayLocal(`${allProjects[i].title} tasks`);
+                Storer.storeArrayLocal(`${allProjects[i].title} tasks`, allProjects[i].taskList);
             };
         };
     };
