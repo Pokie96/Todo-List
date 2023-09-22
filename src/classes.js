@@ -1,13 +1,36 @@
 //Contains the classes required for my JavaScript application
 
-import { getArrayLocal } from "./helperFunction";
+//This is the class constructor for our Tasks
+export class Task {
+    constructor(title, description, dueDate, priority, complete = false){
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.complete = complete;
+        this.type = "Task";
+    }; 
+
+    changeCompleteStatus(){
+        if(this.complete === false){
+            this.complete = true;
+        } else{
+            this.complete = false;
+        };
+    };
+
+    static restoreGenericObject(genericObject){
+        let restoredObject = new Task(genericObject.title, genericObject.description, genericObject.dueDate, genericObject.priority, genericObject.complete);
+        return restoredObject;
+    }
+};
 
 //A class constructor that can be used to create new projects
 export class Project {
     constructor(title, date){
         this.title = title;
         this.date = date;
-        this.taskList = [];
+        this.taskList = Storer.getTaskArrayLocal(`${this.title} tasks`);
     }
 
     addTask(title, description, dueDate, priority, complete){
@@ -45,16 +68,27 @@ export class Storer {
     };
 
     //Function returns an array from local storage
-    static getArrayLocal(keyName){
+    static getProjectArrayLocal(keyName){
         let array;
         if(Storer.checkLocal(keyName) === true){
             let genericArray = JSON.parse(localStorage.getItem(keyName));
-            array = Storer.restoreGenericArray(genericArray);
+            array = Storer.restoreGenericProjectArray(genericArray);
         } else{
             array = [];
         }
         return array;
     };
+
+    static getTaskArrayLocal(keyName){
+        let array;
+        if(Storer.checkLocal(keyName) === true){
+            let genericArray = JSON.parse(localStorage.getItem(keyName));
+            array = Storer.restoreGenericTaskArray(genericArray);
+        } else{
+            array = [];
+        }
+        return array;
+    }
 
     //Function checks for existing array stored in local storage
     //and removes it
@@ -76,19 +110,28 @@ export class Storer {
         }
     };
 
-    static restoreGenericArray = function(array){
+    static restoreGenericProjectArray = function(array){
         let restoredArray = [];
         for(let i = 0; i < array.length; i++){
             let restoredObject = Project.restoreGenericObject(array[i]);
             restoredArray.push(restoredObject);
         }
         return restoredArray;
-    }
+    };
+
+    static restoreGenericTaskArray = function(array){
+        let restoredArray = [];
+        for (let i = 0; i < array.length; i++){
+            let restoredObject = Task.restoreGenericObject(array[i]);
+            restoredArray.push(restoredObject);
+        };
+        return restoredArray;
+    };
 };
 
 //This class has control over the collection of the projects
 export class Controller {
-    static projectsArray = Storer.getArrayLocal('Projects Array');
+    static projectsArray = Storer.getProjectArrayLocal('Projects Array');
 
     getProjectsArray(){
         return Controller.projectsArray;
@@ -104,23 +147,4 @@ export class Controller {
     
 };
 
-//This is the class constructor for our Tasks
-export class Task {
-    constructor(title, description, dueDate, priority, complete = false){
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.complete = complete;
-        this.type = "Task";
-    }; 
-
-    changeCompleteStatus(){
-        if(this.complete === false){
-            this.complete = true;
-        } else{
-            this.complete = false;
-        };
-    };
-};
 

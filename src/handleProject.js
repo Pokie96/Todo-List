@@ -1,7 +1,6 @@
 import { appendChildren, todaysDate } from "./helperFunction";
-import { Project } from "./classes";
 import { renderCreateAddTaskBtn, renderProjectTasks, removeAllTasksDOM, removeAddTaskButton, removeTaskForm } from "./handleTask";
-import { Controller, Storer} from "./classes";
+import { Controller, Storer, Project} from "./classes";
 
 //A function to close the form that will be used in other 
 //functions within this module

@@ -118,6 +118,7 @@ export const openTaskForm = function(elementToAppendTo, currentProject){
     //Add event listener to render the task to submit button
     newTaskSubmitBtn.addEventListener('click', () => {
         addTaskToProject(currentProject);
+        Storer.storeArrayLocal(`${currentProject.title} tasks`, currentProject.taskList);
         renderCreateAddTaskBtn(document.querySelector('.add-task-btn-wrapper') ,currentProject)
         chooseRenderType('Project', currentProject);
         removeTaskForm();
@@ -240,8 +241,9 @@ export const renderDeleteTaskBtn = function(thisProject, thisTask){
     deleteTaskBtn.innerText = 'X';
     deleteTaskBtn.addEventListener('click', ()=>{
         let currentRenderType = Storer.currentlySelected;
-        console.log(currentRenderType);
         thisProject.removeTask(thisTask);
+        Storer.removeArrayLocal(`${thisProject.title} tasks`);
+        Storer.storeArrayLocal(`${thisProject.title} tasks`, thisProject.taskList);
         chooseRenderType(currentRenderType, thisProject);
     })
     return deleteTaskBtn;
